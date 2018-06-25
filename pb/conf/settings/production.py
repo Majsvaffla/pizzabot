@@ -5,7 +5,7 @@ DEBUG = False
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-ALLOWED_HOSTS = ['makavaf.al']
+ALLOWED_HOSTS = ['pizzabot.makavaf.al']
 
 
 # Slack
