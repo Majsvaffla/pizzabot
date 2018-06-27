@@ -4,7 +4,7 @@ DEBUG = True
 
 SECRET_KEY = 'such secret'
 
-ALLOWED_HOSTS = ['22524074.ngrok.io', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Slack
