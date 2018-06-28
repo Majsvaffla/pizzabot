@@ -11,3 +11,7 @@ djangorestframework = "*"
 psycopg2 = "*"
 slackclient = "*"
 slackeventsapi = "*"
+uwsgi = "*"
+
+[requires]
+python_version = "3.6"
