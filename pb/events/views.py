@@ -27,10 +27,11 @@ class Events(APIView):
             if event.get('subtype') == 'bot_message':
                 return Response(status=status.HTTP_200_OK)
 
-            text = event.get('text')
             channel = event.get('channel')
-            
-            if message_in_channel(channel, PIZZA_CHANNEL):
+
+            if event.get('type') == 'message' and message_in_channel(channel, PIZZA_CHANNEL):
+                text = event.get('text')
+
                 def api_call(response):
                     slack_client.api_call(
                         method='chat.postMessage',
