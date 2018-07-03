@@ -18,7 +18,8 @@ class Events(APIView):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         if request.data.get('type') == 'url_verification':
-            return Response(data=request.data, status=status.HTTP_200_OK)
+            challenge = request.data.get('challenge')
+            return Response(data={'challenge': challenge})
 
         if 'event' in request.data:
             event = request.data.get('event')
