@@ -7,7 +7,7 @@ from django.conf import settings
 
 from . import phrases
 from . import responses
-
+from .utils import message_in_channel
 
 slack_client = SlackClient(settings.SLACK_BOT_USER_TOKEN)
 
@@ -30,18 +30,19 @@ class Events(APIView):
             text = event.get('text')
             channel = event.get('channel')
             
-            def api_call(response):
-                slack_client.api_call(
-                    method='chat.postMessage',
-                    channel=channel,
-                    text=response.text,
-                )
+            if message_in_channel(channel, PIZZA_CHANNEL):
+                def api_call(response):
+                    slack_client.api_call(
+                        method='chat.postMessage',
+                        channel=channel,
+                        text=response.text,
+                    )
 
-            phrase = phrases.from_text(text)
-            response = responses.from_phrase(phrase)
+                phrase = phrases.from_text(text)
+                response = responses.from_phrase(phrase)
 
-            if response is not None:
-                api_call(response)
+                if response is not None:
+                    api_call(response)
 
             return Response(status=status.HTTP_200_OK)
 
