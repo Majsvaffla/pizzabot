@@ -1,1 +1,1 @@
-SLACK_CHANNEL = 'crazy-tuesday'
+PIZZA_CHANNEL = 'crazy-tuesday'
