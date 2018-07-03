@@ -1,7 +1,19 @@
+from slackclient import SlackClient
+
+from django.conf import settings
+
+
+slack_client = SlackClient(settings.SLACK_BOT_USER_TOKEN)
+
+
 def message_in_channel(channel_id, match_channel):
-    channel = slack_client.api_call(
+    response = slack_client.api_call(
         method='channels.info',
         channel=channel_id,
     )
-    channel_name = channel.get('name')
-    return channel_name == match_channel
+    
+    if response.get('ok'):
+        channel_name = response['channel']['name']
+        return channel_name == match_channel
+
+    return False
