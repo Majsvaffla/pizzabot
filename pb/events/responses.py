@@ -1,14 +1,29 @@
-from datetime import date
+from datetime import date, datetime
 
 import attr
 
 from . import phrases
+from .constants import RESPONSE_DEFAULT_TIMEOUT
 
 
 @attr.attrs
 class _Response:
     identifier = attr.attrib()
-    text = attr.attrib()
+    _text = attr.attrib()
+    _timeout = attr.attrib(default=RESPONSE_DEFAULT_TIMEOUT)
+    _last_used_at = datetime.min()
+
+    @property
+    def text(self):
+        self._last_used_now()
+        return self._text
+
+    @property
+    def cool(self):
+        return self._last_used_at + self._timeout < datetime.now()
+
+    def _last_used_now(self):
+        self._last_used_at = datetime.now()
 
 
 yes_it_is = _Response(
@@ -41,22 +56,39 @@ no_its_wacky_wednesday = _Response(
 )
 did_you_say_pizza = _Response(
     identifier='did_you_say_pizza',
-    text='Hörde jag :pizza:?'
+    text='Hörde jag :pizza:?',
+    timeout=300,
 )
 
 
+_weekday_responses = [
+    no_its_monday,
+    yes_its_hashtag_crazy,
+    no_its_wednesday,
+]
+
+
+def _from_weekday():
+    weekday = date.today().weekday()
+
+    if weekday < len(_weekday_responses):
+        return _weekday_responses[weekday]
+
+    return no_its_not
+
+
+_response_map = {
+    phrases.is_it_tuesday.identifier: _from_weekday,
+    phrases.pizza.identifier: lambda: did_you_say_pizza,
+}
+
+
+def _from_phrase_identifier(identifier):
+    return _response_map[phrase.identifier]()
+
+
 def from_phrase(phrase):
-    if phrase == phrases.is_it_tuesday:
-        weekday = date.today().isoweekday()
+    response = _from_phrase_identifier(phrase.identifier)
 
-        if weekday == 1:
-            return no_its_monday
-        elif weekday == 2:
-            return yes_its_hashtag_crazy
-        elif weekday == 3:
-            return no_its_wednesday
-        else:
-            return no_its_not
-
-    if phrase == phrases.pizza:
-        return did_you_say_pizza
+    if response.cool:
+        return response
