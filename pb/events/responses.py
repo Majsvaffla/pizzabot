@@ -11,7 +11,7 @@ class _Response:
     identifier = attr.attrib()
     _text = attr.attrib()
     _timeout = attr.attrib(default=RESPONSE_DEFAULT_TIMEOUT)
-    _last_used_at = datetime.min()
+    _last_used_at = datetime.min
 
     @property
     def text(self):
