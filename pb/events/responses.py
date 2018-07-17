@@ -3,7 +3,7 @@ from datetime import date, datetime
 import attr
 
 from . import phrases
-from .constants import RESPONSE_DEFAULT_TIMEOUT
+from .constants import PIZZA_CHANNEL, RESPONSE_DEFAULT_TIMEOUT
 
 
 @attr.attrs
@@ -36,7 +36,7 @@ yes_its_crazy = _Response(
 )
 yes_its_hashtag_crazy = _Response(
     identifier='yes_its_hashtag_crazy',
-    text='Ja, det är #crazy_tuesday! :pizza:',
+    text=f'Ja, det är #{PIZZA_CHANNEL}! :pizza:',
 )
 no_its_not = _Response(
     identifier='no_its_not',
