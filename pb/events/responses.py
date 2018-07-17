@@ -61,34 +61,5 @@ did_you_say_pizza = _Response(
 )
 
 
-_weekday_responses = [
-    no_its_monday,
-    yes_its_hashtag_crazy,
-    no_its_wednesday,
-]
-
-
-def _from_weekday():
-    weekday = date.today().weekday()
-
-    if weekday < len(_weekday_responses):
-        return _weekday_responses[weekday]
-
-    return no_its_not
-
-
-_response_map = {
-    phrases.is_it_tuesday.identifier: _from_weekday,
-    phrases.pizza.identifier: lambda: did_you_say_pizza,
-}
-
-
-def _from_phrase_identifier(identifier):
-    return _response_map[phrase.identifier]()
-
-
 def from_phrase(phrase):
-    response = _from_phrase_identifier(phrase.identifier)
-
-    if response.cool:
-        return response
+    return phrase.response

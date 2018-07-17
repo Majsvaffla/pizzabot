@@ -35,7 +35,7 @@ class Events(APIView):
                 phrase = phrases.from_text(text)
                 response = responses.from_phrase(phrase)
 
-                if response is not None:
+                if response is not None and response.cool:
                     slack_client.api_call(
                         method='chat.postMessage',
                         channel=channel,
