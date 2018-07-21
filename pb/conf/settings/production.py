@@ -32,6 +32,8 @@ if ROLLBAR_ACCESS_TOKEN:
     }
 
     MIDDLEWARE += ['rollbar.contrib.django.middleware.RollbarNotifierMiddlewareExcluding404']
+
+    REST_FRAMEWORK['EXCEPTION_HANDLER'] = 'rollbar.contrib.django_rest_framework.post_exception_handler'
 else:
     from django.core.exceptions import ImproperlyConfigured
     raise ImproperlyConfigured("'ROLLBAR_ACCESS_TOKEN' must be set")
