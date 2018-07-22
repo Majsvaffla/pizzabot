@@ -1,0 +1,19 @@
+[Unit]
+Description=uWSGI pizzabot service
+After=syslog.target
+
+[Service]
+User=pizzabot
+Group=pizzabot
+RuntimeDirectory=/home/pizzabot/current
+PIDFile=/home/pizzabot/pizza.pid
+ExecStart=pipenv run uwsgi --ini /home/pizzabot/current/uwsgi.ini
+ExecReload=pipenv run uwsgi --reload /home/pizzabot/pizza.pid
+ExecStop=pipenv run uwsgi --stop /home/pizzabot/pizza.pid
+Restart=always
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
