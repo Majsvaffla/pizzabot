@@ -8,11 +8,11 @@ attrs = "*"
 dj_database_url = "*"
 django = "*"
 djangorestframework = "*"
+gunicorn = "*"
 psycopg2 = "*"
 rollbar = "*"
 slackclient = "*"
 slackeventsapi = "*"
-uwsgi = "*"
 
 [requires]
 python_version = "3.6"

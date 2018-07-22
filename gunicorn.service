@@ -1,0 +1,17 @@
+[Unit]
+Description=gunicorn pizzabot daemon
+After=network.target syslog.target
+
+[Service]
+User=pizzabot
+Group=pizzabot
+RuntimeDirectory=gunicorn
+WorkingDirectory=/home/pizzabot/current
+ExecStart=/home/pizzabot/pizzabot
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGTERM
+PrivateTmp=true
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
