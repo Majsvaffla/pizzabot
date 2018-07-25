@@ -51,7 +51,6 @@ _all = [
     is_it_tuesday,
     pizza,
 ]
-_text_map = {p.text: p for p in _all}
 
 
 def from_text(text):

@@ -1,27 +1,23 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from slackclient import SlackClient
 
-from django.conf import settings
+from pb.slack.api.calls import post_message
 
 from . import phrases
 from . import responses
 from .constants import PIZZA_CHANNEL
-from .utils import message_in_channel
-
-slack_client = SlackClient(settings.SLACK_BOT_USER_TOKEN)
+from .utils import (
+    message_in_channel,
+    require_verification_token,
+    url_verification,
+)
 
 
 class Events(APIView):
+    @require_verification_token
+    @url_verification
     def post(self, request, *args, **kwargs):
-        if not request.data.get('token') == settings.SLACK_VERIFICATION_TOKEN:
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        if request.data.get('type') == 'url_verification':
-            challenge = request.data.get('challenge')
-            return Response(data={'challenge': challenge})
-
         if 'event' in request.data:
             event = request.data.get('event')
 
@@ -33,14 +29,12 @@ class Events(APIView):
             if event.get('type') == 'message' and message_in_channel(channel, PIZZA_CHANNEL):
                 text = event.get('text')
                 phrase = phrases.from_text(text)
+
+                # if phrase is not None:
                 response = responses.from_phrase(phrase)
 
                 if response is not None and response.cool:
-                    slack_client.api_call(
-                        method='chat.postMessage',
-                        channel=channel,
-                        text=response.text,
-                    )
+                    post_message(text=response.text)
 
             return Response(status=status.HTTP_200_OK)
 
