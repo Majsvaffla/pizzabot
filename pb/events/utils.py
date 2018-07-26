@@ -7,7 +7,7 @@ from pb.slack.api.calls import channel_info
 
 
 def message_in_channel(channel_id, match_channel):
-    response = channel_info(channel_id)
+    response = channel_info(channel=channel_id)
     
     if response.get('ok'):
         channel_name = response['channel']['name']
