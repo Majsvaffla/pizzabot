@@ -59,7 +59,3 @@ did_you_say_pizza = _Response(
     text='Hörde jag :pizza:?',
     timeout=300,
 )
-
-
-def from_phrase(phrase):
-    return phrase.response
