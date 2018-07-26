@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import datetime
 
 import attr
 
@@ -57,5 +57,5 @@ no_its_wacky_wednesday = _Response(
 did_you_say_pizza = _Response(
     identifier='did_you_say_pizza',
     text='Hörde jag :pizza:?',
-    timeout=300,
+    timeout=timedelta(minutes=5),
 )
