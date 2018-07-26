@@ -30,11 +30,11 @@ class Events(APIView):
                 text = event.get('text')
                 phrase = phrases.from_text(text)
 
-                # if phrase is not None:
-                response = phrase.response
+                if phrase is not None:
+                    response = phrase.response
 
-                if response is not None and response.cool:
-                    post_message(text=response.text)
+                    if response is not None and response.cool:
+                        post_message(text=response.text)
 
             return Response(status=status.HTTP_200_OK)
 
