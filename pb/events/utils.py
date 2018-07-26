@@ -18,7 +18,7 @@ def in_channel(channel_id, match_channel):
 
 def message_in_channel(channel_name):    
     def wrapper(view_method):
-        def decorated_view(view, request, *args, **kwargs)
+        def decorated_view(view, request, *args, **kwargs):
             if 'event' in request.data:
                 event = request.data.get('event')
 
