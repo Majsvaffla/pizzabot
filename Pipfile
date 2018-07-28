@@ -14,5 +14,10 @@ rollbar = "*"
 slackclient = "*"
 slackeventsapi = "*"
 
+[dev-packages]
+freezegun = "*"
+pytest = "*"
+pytest-django = "*"
+
 [requires]
 python_version = "3.6"
