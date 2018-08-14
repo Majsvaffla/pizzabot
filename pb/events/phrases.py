@@ -1,3 +1,5 @@
+from datetime import date
+
 import attr
 
 from . import responses
