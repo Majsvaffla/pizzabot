@@ -31,7 +31,7 @@ class _DynamicResponsePhrase(_Phrase):
         if weekday < len(self._responses):
             return self._responses[weekday]
 
-        return no_its_not
+        return responses.no_its_not
 
 
 is_it_tuesday = _DynamicResponsePhrase(
