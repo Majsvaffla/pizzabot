@@ -1,6 +1,7 @@
-# Byte-compiled / optimized / DLL files
+# Byte-compiled / optimized / DLL files / Caches
 __pycache__/
 *.py[cod]
+.pytest_cache/
 
 # Django stuff:
 *.log
