@@ -3,7 +3,7 @@ from rest_framework import status
 
 from django.conf import settings
 
-from pb.slack.api.calls import channel_info
+from pb.slack.api.calls import channel_info, post_message
 
 
 def in_channel(channel_id, match_channel):
@@ -54,4 +54,14 @@ def url_verification(view_method):
             challenge = request.data.get('challenge')
             return Response(data={'challenge': challenge})
 
+        return view_method(view, request, *args, **kwargs)
+
     return decorated_view
+
+
+def post_response_from_phrase(phrase):
+    if phrase is not None:
+        response = phrase.response
+
+        if response is not None and response.cool:
+            return post_message(text=response.text)

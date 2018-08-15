@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 
 import attr
 
-from . import phrases
 from .constants import PIZZA_CHANNEL, RESPONSE_DEFAULT_TIMEOUT
 
 
@@ -22,8 +21,15 @@ class _Response:
     def cool(self):
         return self._last_used_at + self._timeout < datetime.now()
 
+    @cool.setter
+    def cool(self, value):
+        self._last_used_now() if value is False else self._last_used_never()
+
     def _last_used_now(self):
         self._last_used_at = datetime.now()
+
+    def _last_used_never(self):
+        self._last_used_at = datetime.min
 
 
 yes_it_is = _Response(
