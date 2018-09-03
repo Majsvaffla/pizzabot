@@ -40,7 +40,7 @@ def message_in_channel(channel_name):
 
 def require_verification_token(view_method):
     def decorated_view(view, request, *args, **kwargs):
-        if not request.data.get('verification_token') == settings.SLACK_VERIFICATION_TOKEN:
+        if not request.data.get('token') == settings.SLACK_VERIFICATION_TOKEN:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         return view_method(view, request, *args, **kwargs)
