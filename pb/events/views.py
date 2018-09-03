@@ -6,6 +6,7 @@ from . import phrases
 from .constants import PIZZA_CHANNEL
 from .utils import (
     message_in_channel,
+    post_response_from_phrase,
     require_verification_token,
     url_verification,
 )
