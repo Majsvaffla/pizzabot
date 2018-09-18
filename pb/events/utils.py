@@ -21,8 +21,9 @@ def message_in_channel(channel_name):
         def decorated_view(view, request, *args, **kwargs):
             if 'event' in request.data:
                 event = request.data.get('event')
+                unwanted_subtypes = ['bot_message', 'message_deleted']
 
-                if event.get('subtype') == 'bot_message':
+                if event.get('subtype') in unwanted_subtypes:
                     return Response(status=status.HTTP_200_OK)
 
                 channel = event.get('channel')
