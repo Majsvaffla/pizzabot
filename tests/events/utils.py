@@ -149,14 +149,10 @@ def test_url_verification(dummy_view_class, request_factory, event_type, challen
 
 @patch('pb.events.utils.post_message', APICall('api.test'))
 class Test_post_response_from_phrase:
-    @pytest.mark.parametrize('phrase, assert_fn', [
-        (phrases.pizza, lambda r: r['ok']),
-        (None, lambda r: r is None),
-    ])
-    def test_single_message(self, phrase, assert_fn):
+    def test_single_message(self):
         phrases.pizza.response.cool = True
-        response = post_response_from_phrase(phrase)
-        assert assert_fn(response)
+        response = post_response_from_phrase(phrases.pizza)
+        assert response['ok']
 
     def test_recurring_message(self):
         phrases.pizza.response.cool = True
