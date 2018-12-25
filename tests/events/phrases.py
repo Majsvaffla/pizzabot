@@ -21,3 +21,11 @@ def test_is_it_tuesday(date, expected_response):
 def test_pizza():
     response = phrases.pizza.response
     assert response.text == "Hörde jag :pizza:?"
+
+
+class Test_from_text:
+    def test_text_phrase(self):
+        assert phrases.from_text("pizza") is phrases.pizza
+
+    def test_regex_phrase(self):
+        assert phrases.from_text("hörde ja pizza?????") is phrases.did_you_say_pizza

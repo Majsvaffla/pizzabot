@@ -65,3 +65,8 @@ did_you_say_pizza = _Response(
     text='Hörde jag :pizza:?',
     timeout=timedelta(minutes=5),
 )
+oh_you_did = _Response(
+    identifier='oh_you_did',
+    text='Att du gjorde! :pizza:',
+    timeout=timedelta(minutes=5),
+)
