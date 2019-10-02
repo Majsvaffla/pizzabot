@@ -92,7 +92,7 @@
     environment: "production"
     application_id: "210904"
     comment: "$BUDDY_EXECUTION_REVISION - $BUDDY_EXECUTION_REVISION_MESSAGE"
-    token: "${ROLLBAR_ACCESS_TOKEN}"
+    token: "${rollbar_token}"
     token_name: "post_server_item"
     trigger_condition: "ALWAYS"
     integration_id: 35764
