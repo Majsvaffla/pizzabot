@@ -68,7 +68,7 @@
     env_key: "id_rsa"
     authentication_mode: "ENV_KEY"
     commands:
-    - "pipenv run django-admin migrate --settings=pizzabot.conf.settings.production"
+    - "pipenv run django-admin migrate --settings=pb.conf.settings.production"
     - "touch /etc/uwsgi/vassals/pizzabot.ini"
     run_as_script: true
     shell: "BASH"
