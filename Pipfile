@@ -12,6 +12,7 @@ rollbar = "==0.14.2"
 slackclient = "==1.2.1"
 slackeventsapi = "==1.1.0"
 uwsgi = "==2.0.17.1"
+zappa = "==0.48.2"
 
 [dev-packages]
 freezegun = "==0.3.10"
