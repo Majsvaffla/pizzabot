@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 attrs = "==18.1.0"
 dj_database_url = "==0.5.0"
-django = "==2.1"
+django = "==2.2.10"
 djangorestframework = "==3.8.2"
 rollbar = "==0.14.2"
 slackclient = "==1.2.1"
