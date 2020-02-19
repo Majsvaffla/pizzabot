@@ -34,10 +34,20 @@ def message_in_channel(channel_name):
 
                 if event.get('type') == 'message' and in_channel(channel, channel_name):
                     text = event.get('text')
+                    parent_timestamp = event.get('ts')
+                    thread_timestamp = event.get('thread_ts')
+                    is_reply = parent_timestamp != thread_timestamp
 
                     logger.info(f'Channel "{channel_name}" received message: {text}')
 
-                    return view_method(view, request, text, *args, **kwargs)
+                    return view_method(
+                        view,
+                        request,
+                        text,
+                        parent_timestamp if is_reply else None,
+                        *args,
+                        **kwargs,
+                    )
 
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
@@ -71,12 +81,15 @@ def url_verification(view_method):
     return decorated_view
 
 
-def post_response_from_phrase(phrase):
+def post_response_from_phrase(phrase, parent_timestamp=None):
     response = phrase.response
 
     if response is not None:
         if response.cool:
             logger.info('Responding with: {response.text}')
-            return post_message(text=response.text)
+            return post_message(
+                text=response.text,
+                **({"thread_ts": parent_timestamp} if parent_timestamp else {}),
+            )
         else:
             logger.info(f'Response not cool yet')

@@ -20,10 +20,10 @@ class Events(APIView):
     @require_verification_token
     @url_verification
     @message_in_channel(PIZZA_CHANNEL)
-    def post(self, request, message):
+    def post(self, request, message, parent_timestamp):
         phrase = phrases.from_text(message)
 
         if phrase is not None:
-            post_response_from_phrase(phrase)
+            post_response_from_phrase(phrase, parent_timestamp)
 
         return Response(status=status.HTTP_200_OK)
