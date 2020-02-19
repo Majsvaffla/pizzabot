@@ -12,9 +12,6 @@
             ".git",
             ".pytest_cache",
             ".vscode"
-        ],
-        "domain": "pizzabot.makavaf.al",
-        "certificate_arn": "arn:aws:acm:us-east-1:524344942435:certificate/79130ca7-c187-4aa0-8823-d51f60138802",
-        "route53_enabled": false
+        ]
     }
 }
